@@ -7,7 +7,7 @@
 #==================================================================
 
 #Change the following number to the temperature you'd like to be alerted at
-alert=55
+alert=40
 
 #Get number of CPU cores
 ncpu=$(sysctl hw.ncpu | awk '{ print $2 }')
