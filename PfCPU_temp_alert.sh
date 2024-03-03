@@ -32,7 +32,7 @@ get_temp
 #Compare current average temperature to alert threshold, telegram notify if equal or over
 if [ "$avg" -gt "$alert" ]; then
         echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C"
-        php -r 'require_once("/etc/inc/notices.inc"); notify_via_telegram("ALERT: '${thishost}'\nTemperature at '${avg}C'");'
+        php -r 'require_once("/etc/inc/notices.inc"); notify_via_telegram("\u{00AC} ALERT \u{00AC}\nTemperature at '${avg}'\u{2103}");'
         exit 1
 fi
 
