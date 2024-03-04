@@ -7,7 +7,7 @@
 #==================================================================
 
 # Set the following number to the temperature at which you would like to receive alerts
-alert=40
+alert=55
 
 # Get number of CPU cores
 ncpu=$(sysctl hw.ncpu | awk '{ print $2 }')
@@ -40,9 +40,9 @@ for i in $(seq 1 1 $iterations); do
                 #echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C"
 
                 # Uncomment the following lines if you want feedback on the console
-                echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C" >>pftemp_alert.txt
-                wall pftemp_alert.txt
-                rm pftemp_alert.txt
+                #echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C" >>pftemp_alert.txt
+                #wall pftemp_alert.txt
+                #rm pftemp_alert.txt
                 php -r 'require_once("/etc/inc/notices.inc"); notify_via_telegram("\u{203C}\u{FE0F} High temp warning: '${avg}'\u{2103} \u{203C}\u{FE0F}");'
         fi
 
