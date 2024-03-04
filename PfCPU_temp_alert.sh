@@ -28,7 +28,7 @@ get_temp() {
 }
 
 # Define the number of iterations and sleep time
-iterations=2
+iterations=3
 timeInSeconds=20
 
 # Loop through the code block two times
