@@ -31,13 +31,18 @@ get_temp() {
 iterations=2
 timeInSeconds=20
 
-# Loop through the code block five times
+# Loop through the code block two times
 for i in $(seq 1 1 $iterations); do
         get_temp
 
         # Compare the current average temperature to the alert threshold; send a Telegram notification if it's equal to or exceeds the threshold
         if [ "$avg" -gt "$alert" ]; then
-                echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C"
+                #echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C"
+
+                # Uncomment the following lines if you want feedback on the console
+                echo echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C" >>pftemp_alert.txt
+                wall pftemp_alert.txt
+                rm pftemp_alert.txt
                 php -r 'require_once("/etc/inc/notices.inc"); notify_via_telegram("\u{203C}\u{FE0F} High temp warning: '${avg}'\u{2103} \u{203C}\u{FE0F}");'
         fi
 
