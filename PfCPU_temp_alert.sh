@@ -27,8 +27,9 @@ get_temp() {
         avg=$(echo "${avg} / (${ncpu})" | bc)
 }
 
-# Define the number of iterations
+# Define the number of iterations and sleep time
 iterations=2
+timeInSeconds=20
 
 # Loop through the code block five times
 for i in $(seq 1 1 $iterations); do
@@ -38,10 +39,9 @@ for i in $(seq 1 1 $iterations); do
         if [ "$avg" -gt "$alert" ]; then
                 echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C"
                 php -r 'require_once("/etc/inc/notices.inc"); notify_via_telegram("\u{203C}\u{FE0F} High temp warning: '${avg}'\u{2103} \u{203C}\u{FE0F}");'
-                exit 1
         fi
 
-        sleep 30
+        sleep $timeInSeconds
 done
 
 exit 0
