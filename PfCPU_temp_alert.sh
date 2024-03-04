@@ -27,7 +27,11 @@ get_temp() {
         avg=$(echo "${avg} / (${ncpu})" | bc)
 }
 
-while [ $i -le 5 ]; do
+# Define the number of iterations
+iterations=2
+
+# Loop through the code block five times
+for i in $(seq 1 1 $iterations); do
         get_temp
 
         # Compare the current average temperature to the alert threshold; send a Telegram notification if it's equal to or exceeds the threshold
@@ -37,7 +41,7 @@ while [ $i -le 5 ]; do
                 exit 1
         fi
 
-        exit 0
-
-        sleep 10
+        sleep 30
 done
+
+exit 0
