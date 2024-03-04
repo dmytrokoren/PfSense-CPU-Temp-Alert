@@ -2,11 +2,11 @@
 
 #==================================================================
 # description     :This script will find the average temperature of
-#                 the CPU and fire off an telegram notification if
-#                 this temperature is over a set limit ($alert).
+#                  the CPU and trigger a Telegram notification if
+#                  this temperature exceeds a set limit ($alert).
 #==================================================================
 
-# Change the following number to the temperature you'd like to be alerted at
+# Set the following number to the temperature at which you would like to receive alerts
 alert=55
 
 # Get number of CPU cores
@@ -29,9 +29,9 @@ get_temp() {
 
 get_temp
 
-# Compare current average temperature to alert threshold, telegram notify if equal or over
+# Compare the current average temperature to the alert threshold; send a Telegram notification if it's equal to or exceeds the threshold
 if [ "$avg" -gt "$alert" ]; then
-        echo "WARNING: ${thishost} is currently at ${avg}\u{2103}, which is over the alert threshold of ${alert}\u{2103}"
+        echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C"
         php -r 'require_once("/etc/inc/notices.inc"); notify_via_telegram("\u{203C}\u{FE0F} High temp warning: '${avg}'\u{2103} \u{203C}\u{FE0F}");'
         exit 1
 fi
