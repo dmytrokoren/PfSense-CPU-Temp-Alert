@@ -6,8 +6,8 @@
 #                  this temperature exceeds a set limit ($alert).
 #==================================================================
 
-# Set the following number to the temperature at which you would like to receive alerts
-alert=55
+# Set the following number to the temperature (°C) at which you would like to receive alerts
+alert=57.0
 
 # Get number of CPU cores
 ncpu=$(sysctl hw.ncpu | awk '{ print $2 }')
