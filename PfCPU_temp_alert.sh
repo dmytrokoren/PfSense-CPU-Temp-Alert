@@ -21,10 +21,10 @@ get_temp() {
 
         for c in $(jot ${ncpu} 0); do
                 temp=$(sysctl dev.cpu.${c}.temperature | sed -e 's|.*: \([0-9.]*\)C|\1|')
-                avg=$(echo "${avg} + ${temp}" | bc)
+                avg=$(echo "${avg} + ${temp}" | bc | awk '{printf "%.1f", $0}')
         done
 
-        avg=$(echo "${avg} / (${ncpu})" | bc)
+        avg=$(echo "${avg} / (${ncpu})" | bc | awk '{printf "%.1f", $0}')
 }
 
 # Define the number of iterations and sleep time
@@ -36,7 +36,7 @@ for i in $(seq 1 1 $iterations); do
         get_temp
 
         # Compare the current average temperature to the alert threshold; send a Telegram notification if it's equal to or exceeds the threshold
-        if [ "$avg" -gt "$alert" ]; then
+        if [ "$(echo "$avg > $alert" | bc -l)" -eq 1 ]; then
                 #echo "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C"
 
                 # Uncomment the following lines if you want feedback on the console
