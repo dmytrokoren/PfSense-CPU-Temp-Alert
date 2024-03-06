@@ -28,8 +28,8 @@ get_temp() {
 }
 
 # Define the number of iterations and sleep time
-iterations=3
-timeInSeconds=20
+iterations=1
+timeInSeconds=3
 
 # Loop through the code block two times
 for i in $(seq 1 1 $iterations); do
