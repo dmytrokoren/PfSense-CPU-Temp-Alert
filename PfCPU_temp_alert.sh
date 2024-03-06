@@ -44,9 +44,12 @@ for i in $(seq 1 1 $iterations); do
                 #wall pftemp_alert.txt
                 #rm pftemp_alert.txt
                 php -r 'require_once("/etc/inc/notices.inc"); notify_via_telegram("\u{203C}\u{FE0F} High temp warning: '${avg}'\u{2103} \u{203C}\u{FE0F}");'
+                curl -fsS -m 120 --data-raw "WARNING: ${thishost} is currently at ${avg}C, which is over the alert threshold of ${alert}C" https://hc-ping.com/33c45928-c63e-42de-9f74-fbaa621353f6/$?
         fi
 
         sleep $timeInSeconds
 done
 
 exit 0
+
+curl -fsS -m 120 --data-raw "Current temp: $avg" https://hc-ping.com/33c45928-c63e-42de-9f74-fbaa621353f6/$?
