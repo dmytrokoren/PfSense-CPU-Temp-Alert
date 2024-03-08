@@ -56,4 +56,6 @@ output=$({
         done
 } 2>&1)
 
-curl -fsS --retry 3 --data-raw "$output" "${hcPingDomain}${hcUUID}"/$?
+exitStatus=$?
+
+curl -fsS --retry 3 --data-raw "${output}" "${hcPingDomain}${hcUUID}/${exitStatus}"
