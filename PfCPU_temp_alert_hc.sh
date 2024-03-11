@@ -4,6 +4,8 @@
 # description     :This script will find the average temperature of
 #                  the CPU and trigger a Telegram notification if
 #                  this temperature exceeds a set limit ($alert).
+#                  The health check feature is integrated with the
+#                  temperature monitor.
 #==================================================================
 
 # Set your healthchecks.io parameters
@@ -34,8 +36,8 @@ output=$({
         }
 
         # Define the number of iterations and sleep time
-        iterations=3
-        timeInSeconds=20
+        iterations=10
+        timeInSeconds=30
 
         # Loop through the code block two times
         for i in $(seq 1 1 $iterations); do
@@ -56,6 +58,15 @@ output=$({
         done
 } 2>&1)
 
-exitStatus=$?
+# Exit status logic
+exitStatus=${PIPESTATUS[0]}
 
-curl -fsS --retry 3 --data-raw "${output}" "${hcPingDomain}${hcUUID}/${exitStatus}"
+if [ -z "$output" ]; then
+        curl -fsS --retry 3 "${hcPingDomain}${hcUUID}/${exitStatus}"
+else
+        if [ "$exitStatus" -eq 0 ]; then
+                curl -fsS --retry 3 --data-raw "${output}" "${hcPingDomain}${hcUUID}/fail"
+        else
+                curl -fsS --retry 3 --data-raw "${output}" "${hcPingDomain}${hcUUID}/${exitStatus}"
+        fi
+fi

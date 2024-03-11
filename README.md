@@ -2,8 +2,6 @@
 
 A straightforward script designed to alert you when your pfSense box surpasses a predefined temperature threshold.
 
-This guide is extremely beginner friendly.
-
 - Copy the script to the local pfsense router.
 
   1. Login via ssh using root user and password.
@@ -19,7 +17,7 @@ This guide is extremely beginner friendly.
   4. Download the script file.
 
   ```
-  curl -LJO https://raw.githubusercontent.com/dmytrokoren/PfSense-CPU-Temp-Alert/main/PfCPU_temp_alert.sh
+  curl -LJO https://raw.githubusercontent.com/dmytrokoren/PfSense-CPU-Temp-Alert/main/PfCPU_temp_alert_hc.sh
   ```
 
   5. Install nano file editor
@@ -29,10 +27,11 @@ This guide is extremely beginner friendly.
   pkg install nano
   ```
 
-  6. Change 'alert', 'iterations' and 'timeInSeconds' using nano
+  6. Change 'hcUUID', 'alert', 'iterations' and 'timeInSeconds' using nano
+  Note: Need to sign up for healthchecks.io and copy UUID
 
   ```
-  nano PfCPU_temp_alert.sh
+  nano PfCPU_temp_alert_hc.sh
   ```
 
   7. (OPTONAL) Change the script to customize your experience.
@@ -53,13 +52,13 @@ This guide is extremely beginner friendly.
   2. Change permisson to executable.
 
   ```
-  chmod +x PfCPU_temp_alert.sh
+  chmod +x PfCPU_temp_alert_hc.sh
   ```
 
-  3. Run it as "bash PfCPU_temp_alert.sh".
+  3. Run it as "bash PfCPU_temp_alert_hc.sh".
 
   ```
-  bash PfCPU_temp_alert.sh
+  bash PfCPU_temp_alert_hc.sh
   ```
 
 - To run the the script on your local pfsence box on schedule.
@@ -80,10 +79,10 @@ This guide is extremely beginner friendly.
       - Month of the year - *
       - Day of the week - *
       - User -  root
-      - Command - ``` bash /usr/local/bin/PfCPU_temp_alert.sh ```
+      - Command - ``` bash /usr/local/bin/PfCPU_temp_alert_hc.sh ```
 
   3. Click on Save.
 
-We have completed the setup. You will receive a Telegram notification if your system surpasses a specified temperature threshold, allowing prompt action to save your system.
+We have completed the setup. You will receive a Telegram notification if your system surpasses a specified temperature threshold, allowing prompt action to save your system. In addition, you will be able to monitor cron job ping via healthchecks.io
 
 Feedback is always welcome.
