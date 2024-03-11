@@ -36,8 +36,8 @@ output=$({
         }
 
         # Define the number of iterations and sleep time
-        iterations=10
-        timeInSeconds=30
+        iterations=5
+        timeInSeconds=60
 
         # Loop through the code block two times
         for i in $(seq 1 1 $iterations); do
