@@ -27,7 +27,7 @@ A straightforward script designed to alert you when your pfSense box surpasses a
   pkg install nano
   ```
 
-  6. Change 'hcUUID', 'alert', 'iterations' and 'timeInSeconds' using nano
+  6. Change 'hcUUID', 'alert', 'iterations' and 'timeInSeconds' using nano<br>
   Note: Need to sign up for healthchecks.io and copy UUID
 
   ```
