@@ -71,9 +71,11 @@ A straightforward script designed to alert you when your pfSense box surpasses a
 
   Services > corn > add
 
-  Then type as follows
+  Then type as follows<br>
+  (I'm setting 5 min cron job, as I have set iterations: 10, timeInSeconds: 30)<br>
+  This will ping the healthchecks.io once every 5 min, but the CPU temp check will occur every 30 seconds.
 
-      - Minute - *
+      - Minute - 5
       - Hour - *
       - Day of the month - *
       - Month of the year - *
