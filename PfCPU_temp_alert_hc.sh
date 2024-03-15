@@ -52,8 +52,7 @@ output=$({
                         #rm pftemp_alert.txt
                         php -r 'require_once("/etc/inc/notices.inc"); notify_via_telegram("\u{203C}\u{FE0F} High temp warning: '${avg}'\u{2103} \u{203C}\u{FE0F}");'
                 fi
-
-                sleep $timeInSeconds
+                sleep $(($timeInSeconds - 1))
         done
 } 2>&1)
 
